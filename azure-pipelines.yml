@@ -1,0 +1,22 @@
+trigger:
+- main
+
+pool:
+  vmImage: windows-latest
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: FileTransform@1
+  displayName: 'Substitute variables'
+  inputs:
+    folderPath: '$(System.DefaultWorkingDirectory)'
+    fileType: 'json'
+    targetFiles: '**/appsettings.json'
+
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'Build'
+    
+- script: dotnet test
+  displayName: 'Run tests'
