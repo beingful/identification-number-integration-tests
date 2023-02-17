@@ -12,7 +12,7 @@ internal sealed class OtpService
 
     public string GetOneTimePassword()
     {
-        var otpKeyBytes = Base32Encoding.ToBytes(_sensitiveData.OtpSecretKey);
+        var otpKeyBytes = Base32Encoding.ToBytes(_sensitiveData.AccountInfo.OtpSecretKey);
 
         return new Totp(otpKeyBytes).ComputeTotp();
     }

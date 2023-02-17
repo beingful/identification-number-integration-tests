@@ -1,4 +1,5 @@
 using FluentAssertions;
+using IdentificationNumberTests.Database;
 using PINTests.Database.Models;
 using PINTests.Database.Repositories;
 using PINTests.Fixtures;
@@ -24,19 +25,21 @@ public class IdentificationNumberTest : IClassFixture<ServicesFixture>
     [Fact]
     public async void CheckIdentificationNumber_WithValidData()
     {
-        //Act
+        // Act
         int id = await _idNumberVerifierService
-            .CheckIdAsync(_sensitiveData.TaxpayerIdentificationNumber);
+            .CheckIdAsync(_sensitiveData.PersonalInfo.TaxpayerIdentificationNumber);
 
-        UserInfoContext? userInfo = await _userInfoDbRepository
-            .GetUserInfoAsync(id.ToString());
+        UserInfoContext? userInfo = await Try.ExecuteAsync(ct =>
+        {
+            return _userInfoDbRepository.GetUserInfoAsync($"{id}");
+        }, userInfo => userInfo != null);
 
-        //Assert
+        // Assert
         id.Should().BePositive();
 
         userInfo.Should().NotBeNull();
-        userInfo!.Id.Should().BeEquivalentTo(id.ToString());
-        userInfo!.BirthDate.Should().BeEquivalentTo(_sensitiveData.BirthDate);
-        userInfo.AccountNumber.Should().BeEquivalentTo(_sensitiveData.TaxpayerIdentificationNumber);
+        userInfo!.Id.Should().BeEquivalentTo($"{id}");
+        userInfo!.BirthDate.Should().BeEquivalentTo(_sensitiveData.PersonalInfo.BirthDate);
+        userInfo.AccountNumber.Should().BeEquivalentTo(_sensitiveData.PersonalInfo.TaxpayerIdentificationNumber);
     }
 }

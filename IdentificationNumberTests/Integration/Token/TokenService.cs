@@ -19,7 +19,7 @@ internal sealed class TokenService
         _sensitiveData = sensitiveData;
 
         _httpClient = new FlurlHttpClient(
-            baseUrl: Endpoints.TokenEndpoint(_sensitiveData.TenantId),
+            baseUrl: Endpoints.TokenEndpoint(_sensitiveData.OrganizationInfo.TenantId),
             serializerSettings: SerializerSettings.SnakeCaseSettings);
     }
 
@@ -30,11 +30,11 @@ internal sealed class TokenService
         TokenResponse tokenResponse = await _httpClient
             .AddHeader(HttpParameters.ContentType, HttpParameterValues.Form)
             .PostFormAsync<TokenResponse>(
-                (HttpParameters.ClientId, _sensitiveData.ClientId),
-                (HttpParameters.Scope, _sensitiveData.Scope),
+                (HttpParameters.ClientId, _sensitiveData.ClientInfo.ClientId),
+                (HttpParameters.Scope, _sensitiveData.ClientInfo.Scope),
                 (HttpParameters.Code, code),
                 (HttpParameters.GrantType, HttpParameterValues.AuthorizationCode),
-                (HttpParameters.ClientSecret, _sensitiveData.ClientSecret));
+                (HttpParameters.ClientSecret, _sensitiveData.ClientInfo.ClientSecret));
 
         return tokenResponse.AccessToken;
     }

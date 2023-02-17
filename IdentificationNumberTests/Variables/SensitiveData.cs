@@ -1,65 +1,37 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using IdentificationNumberTests.Variables.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace PINTests.Variables;
 
 internal sealed class SensitiveData
 {
-    private readonly IConfiguration _configuration;
+    public SensitiveData(IConfiguration configuration)
+    {
 
-    public SensitiveData(IConfiguration configuration) =>
-        _configuration = configuration;
+        ClientInfo = Get<ClientInfo>(configuration, nameof(ClientInfo));
 
-    public string ClientId =>
-        Get(ClientInfo, nameof(ClientId));
+        OrganizationInfo = Get<OrganizationInfo>(configuration, nameof(OrganizationInfo));
 
-    public string ClientSecret =>
-        Get(ClientInfo, nameof(ClientSecret));
+        AccountInfo = Get<AccountInfo>(configuration, nameof(AccountInfo));
 
-    public string Scope =>
-        Get(ClientInfo, nameof(Scope));
+        PersonalInfo = Get<PersonalInfo>(configuration, nameof(PersonalInfo));
 
-    public string TenantId =>
-        Get(OrganizationInfo, nameof(TenantId));
+        CosmosDbInfo = Get<CosmosDbInfo>(configuration, nameof(CosmosDbInfo));
+    }
 
-    public string Email =>
-        Get(AccountInfo, nameof(Email));
+    public ClientInfo ClientInfo { get; }
 
-    public string Password =>
-        Get(AccountInfo, nameof(Password));
+    public OrganizationInfo OrganizationInfo { get; }
 
-    public string OtpSecretKey =>
-        Get(AccountInfo, nameof(OtpSecretKey));
+    public AccountInfo AccountInfo { get; }
 
-    public string TaxpayerIdentificationNumber =>
-        Get(PersonalInfo, nameof(TaxpayerIdentificationNumber));
+    public PersonalInfo PersonalInfo { get; }
 
-    public string BirthDate =>
-        Get(PersonalInfo, nameof(BirthDate));
+    public CosmosDbInfo CosmosDbInfo { get; }
 
-    public string AccountEndpoint =>
-        Get(CosmosDbInfo, nameof(AccountEndpoint));
-
-    public string AccountKey =>
-        Get(CosmosDbInfo, nameof(AccountKey));
-
-    public string DbName =>
-        Get(CosmosDbInfo, nameof(DbName));
-
-    private string ClientInfo =>
-        nameof(ClientInfo);
-
-    private string OrganizationInfo =>
-        nameof(OrganizationInfo);
-
-    private string AccountInfo =>
-        nameof(AccountInfo);
-
-    private string PersonalInfo =>
-        nameof(PersonalInfo);
-
-    private string CosmosDbInfo =>
-        nameof(CosmosDbInfo);
-
-    private string Get(string sectionName, string variableName) =>
-        _configuration.GetSection(sectionName).GetSection(variableName).Value!;
+    private T Get<T>(IConfiguration configuration, string section)
+        where T : class
+    {
+        return configuration.GetSection(section).Get<T>()!;
+    }
 }

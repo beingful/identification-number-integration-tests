@@ -19,7 +19,7 @@ internal sealed class AuthService
         _otpService = otpService;
         _webDriverClient = webDriverClient;
         _sensitiveData = variableProvider;
-        _urlBuilder = new(baseUrl: Endpoints.AuthorizationEndpoint(variableProvider.TenantId));
+        _urlBuilder = new(baseUrl: Endpoints.AuthorizationEndpoint(variableProvider.OrganizationInfo.TenantId));
     }
 
     public void Authorize()
@@ -35,19 +35,19 @@ internal sealed class AuthService
     private void GoToAuthUrl()
     {
         _urlBuilder.AddParams(
-            (HttpParameters.ClientId, _sensitiveData.ClientId),
+            (HttpParameters.ClientId, _sensitiveData.ClientInfo.ClientId),
             (HttpParameters.ResponseType, HttpParameterValues.Code),
-            (HttpParameters.Scope, _sensitiveData.Scope));
+            (HttpParameters.Scope, _sensitiveData.ClientInfo.Scope));
 
         _webDriverClient.GoTo(_urlBuilder.Url);
     }
 
     private void SignInMicrosoftAccount()
     {
-        _webDriverClient.InsertTextInInputString(WebElementsAttributes.Type, AttributesValues.Email, _sensitiveData.Email);
+        _webDriverClient.InsertTextInInputString(WebElementsAttributes.Type, AttributesValues.Email, _sensitiveData.AccountInfo.Email);
         _webDriverClient.ClickOnElementWithAttribute(WebElementsAttributes.Value, AttributesValues.Next);
 
-        _webDriverClient.InsertTextInInputString(WebElementsAttributes.Type, AttributesValues.Password, _sensitiveData.Password);
+        _webDriverClient.InsertTextInInputString(WebElementsAttributes.Type, AttributesValues.Password, _sensitiveData.AccountInfo.Password);
         _webDriverClient.ClickOnElementWithAttribute(WebElementsAttributes.Value, AttributesValues.SignIn);
     }
 

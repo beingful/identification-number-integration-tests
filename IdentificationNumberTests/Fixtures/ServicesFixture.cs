@@ -27,7 +27,6 @@ public sealed class ServicesFixture
             .AddTransient<IConfiguration>(sp =>
             {
                 return new ConfigurationBuilder()
-                        .SetBasePath(Directory.GetParent(Directory.GetCurrentDirectory())!.Parent!.Parent!.FullName)
                         .AddJsonFile(FileNames.Appsettings)
                         .Build();
             })
@@ -47,12 +46,16 @@ public sealed class ServicesFixture
                 SensitiveData sensitiveData = sp.GetService<SensitiveData>()!;
 
                 options.UseCosmos(
-                    accountEndpoint: sensitiveData.AccountEndpoint,
-                    accountKey: sensitiveData.AccountKey,
-                    databaseName: sensitiveData.DbName);
+                    accountEndpoint: sensitiveData.CosmosDbInfo.AccountEndpoint,
+                    accountKey: sensitiveData.CosmosDbInfo.AccountKey,
+                    databaseName: sensitiveData.CosmosDbInfo.DbName);
             })
             .AddTransient<UserInfoDbRepository>()
-            .BuildServiceProvider();
+            .BuildServiceProvider(new ServiceProviderOptions
+            { 
+                ValidateOnBuild = true, 
+                ValidateScopes = true 
+            });
 
     public TService? GetService<TService>() where TService : class =>
         _serviceProvider.GetService<TService>();
