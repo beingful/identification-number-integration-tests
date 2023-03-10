@@ -1,4 +1,4 @@
-﻿namespace PINTests.Integration.IdNumberVerifier.Models;
+﻿namespace IntegrationTests.Integration.IdNumberVerifier.Models;
 
 internal sealed class IdNumberVerifierResponse
 {

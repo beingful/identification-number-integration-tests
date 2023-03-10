@@ -1,6 +1,6 @@
-﻿namespace PINTests.Database.Constants;
+﻿namespace IntegrationTests.Database.Constants;
 
-internal static class UserInfoContextOriginalColumnNames
+internal static class OriginalColumnNames
 {
     public const string Id = "id";
 

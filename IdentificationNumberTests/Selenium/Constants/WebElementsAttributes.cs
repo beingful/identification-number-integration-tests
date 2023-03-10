@@ -1,4 +1,4 @@
-﻿namespace PINTests.Selenium.Constants;
+﻿namespace IntegrationTests.Selenium.Constants;
 
 internal static class WebElementsAttributes
 {

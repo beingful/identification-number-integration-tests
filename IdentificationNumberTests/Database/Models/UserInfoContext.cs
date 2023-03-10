@@ -1,6 +1,6 @@
 ﻿#nullable disable
 
-namespace PINTests.Database.Models;
+namespace IntegrationTests.Database.Models;
 
 internal sealed class UserInfoContext
 {

@@ -1,7 +1,7 @@
 ﻿using IdentificationNumberTests.Variables.Models;
 using Microsoft.Extensions.Configuration;
 
-namespace PINTests.Variables;
+namespace IntegrationTests.Variables;
 
 internal sealed class SensitiveData
 {

@@ -1,10 +1,10 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using PINTests.Http.Constants;
-using PINTests.Selenium.Constants;
+using IntegrationTests.Http.Constants;
+using IntegrationTests.Selenium.Constants;
 using System.Text.RegularExpressions;
 
-namespace PINTests.Selenium.Clients;
+namespace IntegrationTests.Selenium.Clients;
 
 internal sealed class WebDriverClient
 {

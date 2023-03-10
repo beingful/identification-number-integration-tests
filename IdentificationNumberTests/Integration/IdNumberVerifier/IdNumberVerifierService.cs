@@ -1,9 +1,9 @@
-﻿using PINTests.Http.Clients;
-using PINTests.Http.Constants;
-using PINTests.Integration.IdNumberVerifier.Models;
-using PINTests.Integration.Token;
+﻿using IntegrationTests.Http.Clients;
+using IntegrationTests.Http.Constants;
+using IntegrationTests.Integration.IdNumberVerifier.Models;
+using IntegrationTests.Integration.Token;
 
-namespace PINTests.Integration.IdNumberVerifier;
+namespace IntegrationTests.Integration.IdNumberVerifier;
 
 internal sealed class IdNumberVerifierService
 {

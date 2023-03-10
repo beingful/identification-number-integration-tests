@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace PINTests.Http.JsonSerializer;
+namespace IntegrationTests.Http.JsonSerializer;
 
 internal static class SerializerSettings
 {

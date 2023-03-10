@@ -1,6 +1,6 @@
 ﻿#nullable disable
 
-namespace PINTests.Integration.Token.Models;
+namespace IntegrationTests.Integration.Token.Models;
 
 public sealed class TokenResponse
 {

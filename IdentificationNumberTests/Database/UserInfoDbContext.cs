@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PINTests.Database.Constants;
-using PINTests.Database.Models;
+using IntegrationTests.Database.Constants;
+using IntegrationTests.Database.Models;
 
-namespace PINTests.Database;
+namespace IntegrationTests.Database;
 
 internal sealed class UserInfoDbContext : DbContext
 {
@@ -23,14 +23,14 @@ internal sealed class UserInfoDbContext : DbContext
 
         modelBuilder.Entity<UserInfoContext>()
             .Property(userInfo => userInfo.Id)
-            .ToJsonProperty(UserInfoContextOriginalColumnNames.Id);
+            .ToJsonProperty(OriginalColumnNames.Id);
 
         modelBuilder.Entity<UserInfoContext>()
             .Property(userInfo => userInfo.BirthDate)
-            .ToJsonProperty(UserInfoContextOriginalColumnNames.BirthDate);
+            .ToJsonProperty(OriginalColumnNames.BirthDate);
 
         modelBuilder.Entity<UserInfoContext>()
             .Property(userInfo => userInfo.AccountNumber)
-            .ToJsonProperty(UserInfoContextOriginalColumnNames.AccountNumber);
+            .ToJsonProperty(OriginalColumnNames.AccountNumber);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Flurl;
-using PINTests.Http.Constants;
+using IntegrationTests.Http.Constants;
 
-namespace PINTests.Http.Builders;
+namespace IntegrationTests.Http.Builders;
 
 internal sealed class UrlBuilder
 {

@@ -1,7 +1,7 @@
 ﻿using OtpNet;
-using PINTests.Variables;
+using IntegrationTests.Variables;
 
-namespace PINTests.Integration.Otp;
+namespace IntegrationTests.Integration.Otp;
 
 internal sealed class OtpService
 {

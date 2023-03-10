@@ -1,4 +1,4 @@
-﻿namespace PINTests.Http.Constants;
+﻿namespace IntegrationTests.Http.Constants;
 
 internal static class HttpParameterValues
 {

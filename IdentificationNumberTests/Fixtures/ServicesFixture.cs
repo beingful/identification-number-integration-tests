@@ -1,19 +1,19 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using OpenQA.Selenium;
 using Microsoft.Extensions.Configuration;
-using PINTests.Constants;
-using PINTests.Database;
+using IntegrationTests.Constants;
+using IntegrationTests.Database;
 using Microsoft.EntityFrameworkCore;
-using PINTests.Variables;
-using PINTests.Selenium.Clients;
-using PINTests.Selenium.Providers;
-using PINTests.Integration.Authorization;
-using PINTests.Integration.IdNumberVerifier;
-using PINTests.Integration.Otp;
-using PINTests.Integration.Token;
-using PINTests.Database.Repositories;
+using IntegrationTests.Variables;
+using IntegrationTests.Selenium.Clients;
+using IntegrationTests.Selenium.Providers;
+using IntegrationTests.Integration.Authorization;
+using IntegrationTests.Integration.IdNumberVerifier;
+using IntegrationTests.Integration.Otp;
+using IntegrationTests.Integration.Token;
+using IntegrationTests.Database.Repositories;
 
-namespace PINTests.Fixtures;
+namespace IntegrationTests.Fixtures;
 
 public sealed class ServicesFixture
 {
@@ -30,7 +30,7 @@ public sealed class ServicesFixture
                         .AddJsonFile(FileNames.Appsettings)
                         .Build();
             })
-            .AddTransient<SensitiveData>()
+            .AddSingleton<SensitiveData>()
             .AddTransient<WebDriverClient>(sp =>
             {
                 WebDriver webDriver = WebDriverProvider.GetWebDriver();
@@ -53,8 +53,7 @@ public sealed class ServicesFixture
             .AddTransient<UserInfoDbRepository>()
             .BuildServiceProvider(new ServiceProviderOptions
             { 
-                ValidateOnBuild = true, 
-                ValidateScopes = true 
+                ValidateOnBuild = true
             });
 
     public TService? GetService<TService>() where TService : class =>

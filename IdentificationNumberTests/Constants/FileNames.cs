@@ -1,4 +1,4 @@
-﻿namespace PINTests.Constants;
+﻿namespace IntegrationTests.Constants;
 
 internal static class FileNames
 {

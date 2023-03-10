@@ -3,7 +3,7 @@ using Flurl.Http;
 using Flurl.Http.Configuration;
 using Newtonsoft.Json;
 
-namespace PINTests.Http.Clients;
+namespace IntegrationTests.Http.Clients;
 
 internal sealed class FlurlHttpClient
 {

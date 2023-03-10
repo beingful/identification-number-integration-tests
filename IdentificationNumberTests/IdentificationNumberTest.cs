@@ -1,13 +1,13 @@
 using FluentAssertions;
 using IdentificationNumberTests.Database;
-using PINTests.Database.Models;
-using PINTests.Database.Repositories;
-using PINTests.Fixtures;
-using PINTests.Integration.IdNumberVerifier;
-using PINTests.Variables;
+using IntegrationTests.Database.Models;
+using IntegrationTests.Database.Repositories;
+using IntegrationTests.Fixtures;
+using IntegrationTests.Integration.IdNumberVerifier;
+using IntegrationTests.Variables;
 using Xunit;
 
-namespace PINTests;
+namespace IntegrationTests;
 
 public class IdentificationNumberTest : IClassFixture<ServicesFixture>
 {
@@ -27,19 +27,22 @@ public class IdentificationNumberTest : IClassFixture<ServicesFixture>
     {
         // Act
         int id = await _idNumberVerifierService
-            .CheckIdAsync(_sensitiveData.PersonalInfo.TaxpayerIdentificationNumber);
+            .CheckIdAsync(_sensitiveData.PersonalInfo.TaxpayerIdNumber);
 
         UserInfoContext? userInfo = await Try.ExecuteAsync(ct =>
         {
             return _userInfoDbRepository.GetUserInfoAsync($"{id}");
         }, userInfo => userInfo != null);
 
+        UserInfoContext expectedResult = new()
+        {
+            Id = $"{id}",
+            AccountNumber = _sensitiveData.PersonalInfo.TaxpayerIdNumber,
+            BirthDate = _sensitiveData.PersonalInfo.BirthDate
+        };
+
         // Assert
         id.Should().BePositive();
-
-        userInfo.Should().NotBeNull();
-        userInfo!.Id.Should().BeEquivalentTo($"{id}");
-        userInfo!.BirthDate.Should().BeEquivalentTo(_sensitiveData.PersonalInfo.BirthDate);
-        userInfo.AccountNumber.Should().BeEquivalentTo(_sensitiveData.PersonalInfo.TaxpayerIdentificationNumber);
+        userInfo.Should().BeEquivalentTo(expectedResult);
     }
 }

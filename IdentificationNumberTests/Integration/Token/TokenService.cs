@@ -1,11 +1,11 @@
-﻿using PINTests.Http.Clients;
-using PINTests.Http.JsonSerializer;
-using PINTests.Http.Constants;
-using PINTests.Variables;
-using PINTests.Integration.Token.Models;
-using PINTests.Integration.Authorization;
+﻿using IntegrationTests.Http.Clients;
+using IntegrationTests.Http.JsonSerializer;
+using IntegrationTests.Http.Constants;
+using IntegrationTests.Variables;
+using IntegrationTests.Integration.Token.Models;
+using IntegrationTests.Integration.Authorization;
 
-namespace PINTests.Integration.Token;
+namespace IntegrationTests.Integration.Token;
 
 internal sealed class TokenService
 {

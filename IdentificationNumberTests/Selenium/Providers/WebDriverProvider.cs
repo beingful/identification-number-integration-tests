@@ -1,11 +1,11 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using PINTests.Selenium.Constants;
+using IntegrationTests.Selenium.Constants;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 using WebDriverManager.Helpers;
 
-namespace PINTests.Selenium.Providers;
+namespace IntegrationTests.Selenium.Providers;
 
 internal static class WebDriverProvider
 {

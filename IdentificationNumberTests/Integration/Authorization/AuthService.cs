@@ -1,11 +1,11 @@
-﻿using PINTests.Http.Builders;
-using PINTests.Http.Constants;
-using PINTests.Variables;
-using PINTests.Selenium.Clients;
-using PINTests.Selenium.Constants;
-using PINTests.Integration.Otp;
+﻿using IntegrationTests.Http.Builders;
+using IntegrationTests.Http.Constants;
+using IntegrationTests.Variables;
+using IntegrationTests.Selenium.Clients;
+using IntegrationTests.Selenium.Constants;
+using IntegrationTests.Integration.Otp;
 
-namespace PINTests.Integration.Authorization;
+namespace IntegrationTests.Integration.Authorization;
 
 internal sealed class AuthService
 {
