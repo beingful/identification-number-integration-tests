@@ -39,7 +39,7 @@ internal static class WebDriverProvider
     {
         ChromeDriver webDriver = new(options);
 
-        webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+        webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(7);
 
         return webDriver;
     }
