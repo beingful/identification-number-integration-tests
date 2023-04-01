@@ -1,0 +1,7 @@
+**/bin
+**/obj
+**/.git
+**/.gitignore
+**/.vs
+**/.vscode
+azure-pipelines.yml

@@ -1,0 +1,10 @@
+ARG containerName
+
+FROM ${containername}.chrome-install
+
+COPY . /source/IdentificationNumberTests
+
+WORKDIR /source/IdentificationNumberTests
+
+RUN dotnet build
+

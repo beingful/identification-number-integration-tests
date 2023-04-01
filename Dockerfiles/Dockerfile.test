@@ -1,0 +1,5 @@
+ARG containerName
+
+FROM ${containerName}.build
+
+RUN dotnet test --no-restore --no-build
