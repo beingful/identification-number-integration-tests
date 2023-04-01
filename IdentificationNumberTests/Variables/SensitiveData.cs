@@ -7,15 +7,9 @@ internal sealed class SensitiveData
 {
     public SensitiveData(IConfiguration configuration)
     {
-
         ClientInfo = Get<ClientInfo>(configuration, nameof(ClientInfo));
-
         OrganizationInfo = Get<OrganizationInfo>(configuration, nameof(OrganizationInfo));
-
         AccountInfo = Get<AccountInfo>(configuration, nameof(AccountInfo));
-
-        PersonalInfo = Get<PersonalInfo>(configuration, nameof(PersonalInfo));
-
         CosmosDbInfo = Get<CosmosDbInfo>(configuration, nameof(CosmosDbInfo));
     }
 
@@ -24,8 +18,6 @@ internal sealed class SensitiveData
     public OrganizationInfo OrganizationInfo { get; }
 
     public AccountInfo AccountInfo { get; }
-
-    public PersonalInfo PersonalInfo { get; }
 
     public CosmosDbInfo CosmosDbInfo { get; }
 

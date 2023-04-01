@@ -4,7 +4,7 @@ namespace IntegrationTests.Database.Models;
 
 internal sealed class UserInfoContext
 {
-    public string Id { get; init; }
+    public string Id { get; set; }
 
     public string BirthDate { get; init; }
 

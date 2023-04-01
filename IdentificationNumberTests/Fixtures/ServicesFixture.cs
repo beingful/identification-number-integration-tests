@@ -31,12 +31,11 @@ public sealed class ServicesFixture
                         .Build();
             })
             .AddSingleton<SensitiveData>()
-            .AddTransient<WebDriverClient>(sp =>
+            .AddTransient<WebDriver>(sp =>
             {
-                WebDriver webDriver = WebDriverProvider.GetWebDriver();
-
-                return new WebDriverClient(webDriver);
+                return WebDriverProvider.GetWebDriver();
             })
+            .AddTransient<WebDriverClient>()
             .AddTransient<OtpService>()
             .AddTransient<AuthService>()
             .AddTransient<TokenService>()

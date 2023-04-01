@@ -10,12 +10,8 @@ internal sealed class UserInfoDbRepository
     public UserInfoDbRepository(UserInfoDbContext userInfoDbContext) =>
         _userInfoDbContext = userInfoDbContext;
 
-    public async Task<UserInfoContext?> GetUserInfoAsync(string id)
-    {
-        var a = await _userInfoDbContext
+    public async Task<UserInfoContext?> GetUserInfoAsync(string id) =>
+        await _userInfoDbContext
             .UsersInfo
             .FirstOrDefaultAsync(userInfo => userInfo.Id == id);
-
-        return a;
-    }
 }
