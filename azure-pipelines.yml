@@ -6,7 +6,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  containerName: 'taxpayer-number-test-container'
+  CONTAINER_NAME: 'taxpayer-number-test-container'
 
 steps:
 - task: FileTransform@1
@@ -22,11 +22,11 @@ steps:
     dockerVersion: '17.09.0-ce'
     releaseType: stable
 
-- script: 'docker build --force-rm -t $(containerName)/chrome-install -f Dockerfiles/Dockerfile.chrome-install .'
+- script: 'docker build --force-rm -t $(CONTAINER_NAME)/chrome-install -f Dockerfiles/Dockerfile.chrome-install .'
   displayName: 'Install Google Chrome'
   
-- script: 'docker build --force-rm -t $(containerName)/build -f Dockerfiles/Dockerfile.build --build-arg containerName=$(containerName) .'
+- script: 'docker build --force-rm -t $(CONTAINER_NAME)/build -f Dockerfiles/Dockerfile.build --build-arg CONTAINER_NAME=$(containerName) .'
   displayName: 'Build app'
 
-- script: 'docker build --force-rm -t $(containerName)/test -f Dockerfiles/Dockerfile.test --build-arg containerName=$(containerName) .'
+- script: 'docker build --force-rm -t $(CONTAINER_NAME)/test -f Dockerfiles/Dockerfile.test --build-arg CONTAINER_NAME=$(containerName) .'
   displayName: 'Test app'
