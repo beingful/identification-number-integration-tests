@@ -1,6 +1,6 @@
-ARG containerName
+ARG CONTAINER_NAME
 
-FROM taxpayer-number-test-container/chrome-install
+FROM $(CONTAINER_NAME)/chrome-install
 
 COPY . /source/IdentificationNumberTests
 
