@@ -1,6 +1,6 @@
 ARG containerName
 
-FROM ${containername}/chrome-install
+FROM $containername/chrome-install
 
 COPY . /source/IdentificationNumberTests
 
