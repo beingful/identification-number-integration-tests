@@ -1,6 +1,5 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 
-RUN apt-get install -y wget
 RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.dev
 RUN apt-get install -y ./google-chrome-stable_current_amd64.deb
 RUN rm ./google-chrome-stable_current_amd64.deb
