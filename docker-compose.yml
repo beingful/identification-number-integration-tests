@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  install-chrome:
+    image: ${containerName}/chrome-install
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile.chrome-install
+      args:
+        - containerName=${containerName}
+  build-app:
+    image: ${containerName}/build
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile.build
+      args:
+        - containerName=${containerName}
+  test-app:
+    image: ${containerName}/test
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile.test
+      args: containerName=${containerName}
