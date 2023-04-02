@@ -9,24 +9,27 @@ variables:
   containerName: 'taxpayer-number-test-container'
 
 steps:
-- task: FileTransform@1
-  displayName: 'Substitute variables'
-  inputs:
-    folderPath: '$(System.DefaultWorkingDirectory)'
-    fileType: 'json'
-    targetFiles: '**/appsettings.json'
+  - script: echo $(containerName)
+    displayName: 'Show variable'
 
-- task: DockerInstaller@0
-  displayName: 'Install Docker'
-  inputs:
-    dockerVersion: '17.09.0-ce'
-    releaseType: stable
+# - task: FileTransform@1
+#   displayName: 'Substitute variables'
+#   inputs:
+#     folderPath: '$(System.DefaultWorkingDirectory)'
+#     fileType: 'json'
+#     targetFiles: '**/appsettings.json'
 
-- script: 'docker build --force-rm -t $(containerName)/chrome-install -f Dockerfiles/Dockerfile.chrome-install .'
-  displayName: 'Install Google Chrome'
+# - task: DockerInstaller@0
+#   displayName: 'Install Docker'
+#   inputs:
+#     dockerVersion: '17.09.0-ce'
+#     releaseType: stable
+
+# - script: 'docker build --force-rm -t $(containerName)/chrome-install -f Dockerfiles/Dockerfile.chrome-install .'
+#   displayName: 'Install Google Chrome'
   
-- script: 'docker build --force-rm -t $(containerName)/build -f Dockerfiles/Dockerfile.build --build-arg containerName=$(containerName) .'
-  displayName: 'Build app'
+# - script: 'docker build --force-rm -t $(containerName)/build -f Dockerfiles/Dockerfile.build --build-arg containerName=$(containerName) .'
+#   displayName: 'Build app'
 
-- script: 'docker build --force-rm -t $(containerName)/test -f Dockerfiles/Dockerfile.test --build-arg containerName=$(containerName) .'
-  displayName: 'Test app'
+# - script: 'docker build --force-rm -t $(containerName)/test -f Dockerfiles/Dockerfile.test --build-arg containerName=$(containerName) .'
+#   displayName: 'Test app'
