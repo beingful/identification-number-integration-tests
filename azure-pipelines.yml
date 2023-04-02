@@ -1,12 +1,12 @@
 trigger:
-- master
-- azure-pipelines
+- main
 
 pool:
   vmImage: windows-latest
 
 variables:
   buildConfiguration: 'Release'
+  containerName: 'taxpayer-number-test-container'
 
 steps:
 - task: FileTransform@1
@@ -16,8 +16,20 @@ steps:
     fileType: 'json'
     targetFiles: '**/appsettings.json'
 
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'Build'
-    
-- script: dotnet test
-  displayName: 'Run tests'
+- powershell: Get-ChildItem -Path '$(System.DefaultWorkingDirectory)' -recurse
+  displayName: 'Check file system'
+
+- task: DockerInstaller@0
+  displayName: 'Install Docker'
+  inputs:
+    dockerVersion: '17.09.0-ce'
+    releaseType: stable
+
+- script: 'docker build --force-rm -t $(containerName)/chrome-install -f Dockerfiles/Dockerfile.chrome-install .'
+  displayName: 'Install Google Chrome'
+  
+- script: 'docker build --force-rm $(containerName) -t $(containerName)/build -f Dockerfiles/Dockerfile.build .'
+  displayName: 'Build app'
+
+- script: 'docker build --force-rm $(containerName) -t $(containerName)/test -f Dockerfiles/Dockerfile.test .'
+  displayName: 'Test app'
