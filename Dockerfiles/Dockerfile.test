@@ -1,5 +1,5 @@
 ARG CONTAINER_NAME
 
-FROM $(CONTAINER_NAME)/build
+FROM ${CONTAINER_NAME}/build
 
 RUN dotnet test --no-restore --no-build
