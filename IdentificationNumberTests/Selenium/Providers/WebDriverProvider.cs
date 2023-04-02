@@ -29,6 +29,8 @@ internal static class WebDriverProvider
         ChromeOptions chromeOptions = new();
 
         chromeOptions.AddArgument(BrowserSettings.Headless);
+        chromeOptions.AddArgument(BrowserSettings.NoSandbox);
+        chromeOptions.AddArgument(BrowserSettings.DisableDevUsage);
         chromeOptions.AddArgument(BrowserSettings.UiLanguage);
         chromeOptions.AddArgument(BrowserSettings.GuestAccount);
 
