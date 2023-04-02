@@ -16,9 +16,6 @@ steps:
     fileType: 'json'
     targetFiles: '**/appsettings.json'
 
-- powershell: Get-ChildItem -Path '$(System.DefaultWorkingDirectory)' -recurse
-  displayName: 'Check file system'
-
 - task: DockerInstaller@0
   displayName: 'Install Docker'
   inputs:
@@ -28,8 +25,8 @@ steps:
 - script: 'docker build --force-rm -t $(containerName)/chrome-install -f Dockerfiles/Dockerfile.chrome-install .'
   displayName: 'Install Google Chrome'
   
-- script: 'docker build --force-rm $(containerName) -t $(containerName)/build -f Dockerfiles/Dockerfile.build .'
+- script: 'docker build --force-rm -t $(containerName)/build -f Dockerfiles/Dockerfile.build containerName=$(containerName) .'
   displayName: 'Build app'
 
-- script: 'docker build --force-rm $(containerName) -t $(containerName)/test -f Dockerfiles/Dockerfile.test .'
+- script: 'docker build --force-rm -t $(containerName)/test -f Dockerfiles/Dockerfile.test --build-arg containerName=$(containerName) .'
   displayName: 'Test app'
