@@ -1,5 +1,6 @@
 trigger:
-- main
+- master
+- azure-pipelines
 
 pool:
   vmImage: windows-latest
