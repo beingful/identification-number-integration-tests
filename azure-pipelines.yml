@@ -25,7 +25,7 @@ steps:
 - script: 'docker build --force-rm -t $(containerName)/chrome-install -f Dockerfiles/Dockerfile.chrome-install .'
   displayName: 'Install Google Chrome'
   
-- script: 'docker build --force-rm -t $(containerName)/build -f Dockerfiles/Dockerfile.build containerName=$(containerName) .'
+- script: 'docker build --force-rm -t $(containerName)/build -f Dockerfiles/Dockerfile.build --build-arg containerName=$(containerName) .'
   displayName: 'Build app'
 
 - script: 'docker build --force-rm -t $(containerName)/test -f Dockerfiles/Dockerfile.test --build-arg containerName=$(containerName) .'
