@@ -16,11 +16,11 @@ steps:
     fileType: 'json'
     targetFiles: '**/appsettings.json'
 
-- task: DockerInstaller@0
-  displayName: 'Install Docker'
-  inputs:
-    dockerVersion: '17.09.0-ce'
-    releaseType: stable
+# - task: DockerInstaller@0
+#   displayName: 'Install Docker'
+#   inputs:
+#     dockerVersion: '17.09.0-ce'
+#     releaseType: stable
 
 - script: 'docker build --force-rm -t $(CONTAINER_NAME)/chrome-install -f Dockerfiles/Dockerfile.chrome-install .'
   displayName: 'Install Google Chrome'
