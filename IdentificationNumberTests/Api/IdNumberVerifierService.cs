@@ -1,9 +1,9 @@
 ﻿using IntegrationTests.Http.Clients;
 using IntegrationTests.Http.Constants;
-using IntegrationTests.Integration.IdNumberVerifier.Models;
 using IntegrationTests.Integration.Token;
+using Swagger.Model;
 
-namespace IntegrationTests.Integration.IdNumberVerifier;
+namespace IdentificationNumberTests.Api;
 
 internal sealed class IdNumberVerifierService
 {
@@ -16,17 +16,15 @@ internal sealed class IdNumberVerifierService
         _httpClient = new(baseUrl: Endpoints.CheckId);
     }
 
-    public async Task<int> CheckIdAsync(string number)
+    public async Task<long?> CheckIdAsync(NumberRequest request)
     {
-        IdNumberVerifierRequest request = new() { Number = number };
-
         string token = await _tokenService.GetTokenAsync();
 
-        IdNumberVerifierResponse response = await _httpClient
+        NumberResponse response = await _httpClient
             .AddHeader(HttpParameters.Accept, HttpParameterValues.Json)
             .AddHeader(HttpParameters.ContentType, HttpParameterValues.Json)
             .AddOAuthBearerToken(token)
-            .PostWithContentAsync<IdNumberVerifierResponse>(request);
+            .PostWithContentAsync<NumberResponse>(request);
 
         return response.Id;
     }

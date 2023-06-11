@@ -1,9 +1,10 @@
 using FluentAssertions;
+using IdentificationNumberTests.Api;
 using IdentificationNumberTests.Database;
 using IntegrationTests.Database.Models;
 using IntegrationTests.Database.Repositories;
 using IntegrationTests.Fixtures;
-using IntegrationTests.Integration.IdNumberVerifier;
+using Swagger.Model;
 using Xunit;
 
 namespace IntegrationTests;
@@ -24,9 +25,11 @@ public class IdentificationNumberTest : IClassFixture<ServicesFixture>
 
     [Theory]
     [MemberData(nameof(TextpayerIdNumberAndDateOfBirth))]
-    public async void CheckIdentificationNumber_WithValidData(string taxpayerIdNumber, string birthDate)
+    public async void PostCheckId_WithValidData_ShouldReturnOK(string taxpayerIdNumber, string birthDate)
     {
         // Arrange
+        NumberRequest numberRequest = new(taxpayerIdNumber);
+
         UserInfoContext expectedResult = new()
         {
             AccountNumber = taxpayerIdNumber,
@@ -34,7 +37,7 @@ public class IdentificationNumberTest : IClassFixture<ServicesFixture>
         };
 
         // Act
-        int id = await _idNumberVerifierService.CheckIdAsync(taxpayerIdNumber);
+        long? id = await _idNumberVerifierService.CheckIdAsync(numberRequest);
 
         UserInfoContext? userInfo = await Try.ExecuteAsync(ct =>
         {

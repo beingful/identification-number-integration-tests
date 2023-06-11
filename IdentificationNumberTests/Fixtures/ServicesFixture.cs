@@ -8,10 +8,10 @@ using IntegrationTests.Variables;
 using IntegrationTests.Selenium.Clients;
 using IntegrationTests.Selenium.Providers;
 using IntegrationTests.Integration.Authorization;
-using IntegrationTests.Integration.IdNumberVerifier;
 using IntegrationTests.Integration.Otp;
 using IntegrationTests.Integration.Token;
 using IntegrationTests.Database.Repositories;
+using IdentificationNumberTests.Api;
 
 namespace IntegrationTests.Fixtures;
 
